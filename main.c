@@ -1,9 +1,14 @@
 #include <gtk/gtk.h>
 #include "HeaderBar/HeaderBar.h"
 #include "TextEnvironment/TextEnvironment.h"
+#include "TextEnvironment/LineNumbers/LineNumbers.h"
+#include "SyntaxHighlighting/SyntaxHighlighting.h"
 #include "MainData.h"
 
 static gchar* title = "Cedit";
+
+static gint syntax_delay = 1;
+static gint line_numbers_delay = 500;
 
 static gint window_width = 640;
 static gint window_height = 360;
@@ -24,6 +29,10 @@ static void activate(GtkApplication* app, gpointer user_data){
     Create_Text_Environment(window_box, &main_data);
 
     gtk_widget_show_all(main_data.window);
+
+    //g_timeout_add_seconds(1, Syntax_Highlighting, main_data.current_text_buffer);
+
+    g_timeout_add(line_numbers_delay, Refresh_Line_Numbers, &main_data);
 }
 
 int main(int argc, char** argv){

@@ -5,6 +5,7 @@
 struct Main_Data{
     GtkWidget* window;
     GtkTextBuffer* current_text_buffer;
+    GtkTextBuffer* line_numbers_buffer;
     gchar* current_selected_file;
 };
 
