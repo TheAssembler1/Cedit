@@ -1,6 +1,6 @@
 #include "HeaderBar.h"
 
-void Create_Header_Bar(GtkWidget* window, GtkWidget** window_box){
+void Create_Header_Bar(struct Main_Data* main_data, GtkWidget** window_box){
     GtkWidget* header_bar;
 
     GtkWidget* file_item;
@@ -13,7 +13,7 @@ void Create_Header_Bar(GtkWidget* window, GtkWidget** window_box){
     *window_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     header_bar = gtk_menu_bar_new();
 
-    gtk_container_add(GTK_CONTAINER(window), *window_box);
+    gtk_container_add(GTK_CONTAINER(main_data->window), *window_box);
     gtk_box_pack_start(GTK_BOX(*window_box), header_bar, FALSE, FALSE, 0);
 
     file_item = gtk_menu_item_new_with_label("File");
@@ -34,8 +34,8 @@ void Create_Header_Bar(GtkWidget* window, GtkWidget** window_box){
     gtk_menu_shell_append(GTK_MENU_SHELL(file_submenu), file_save_submenu_item);
     gtk_menu_shell_append(GTK_MENU_SHELL(file_submenu), file_saveas_submenu_item);
 
-    g_signal_connect(file_new_submenu_item, "activate", G_CALLBACK(File_New), NULL);
-    g_signal_connect(file_open_submenu_item, "activate", G_CALLBACK(File_Open), NULL);
-    g_signal_connect(file_save_submenu_item, "activate", G_CALLBACK(File_Save), NULL);
-    g_signal_connect(file_saveas_submenu_item, "activate", G_CALLBACK(File_Saveas), NULL);
+    g_signal_connect(file_new_submenu_item, "activate", G_CALLBACK(File_New), main_data);
+    g_signal_connect(file_open_submenu_item, "activate", G_CALLBACK(File_Open), main_data);
+    g_signal_connect(file_save_submenu_item, "activate", G_CALLBACK(File_Save), main_data);
+    g_signal_connect(file_saveas_submenu_item, "activate", G_CALLBACK(File_Saveas), main_data);
 }
