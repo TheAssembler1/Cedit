@@ -8,8 +8,17 @@ static gchar* Get_Text_In_Buffer(GtkTextBuffer* text_buffer){
     return gtk_text_buffer_get_text(text_buffer, &iter_start, &iter_end, TRUE);
 }
 
+static gint File_Exist(gchar* file){
+    if(access(file, F_OK) != -1){
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 void File_New(GtkWidget* widget, struct Main_Data* main_data){
-    g_print("FILE NEW");
+    File_Save(NULL, main_data);
+    gtk_text_buffer_set_text(main_data->current_text_buffer, "0", 0);   
 }
 
 void File_Open(GtkWidget* widget, struct Main_Data* main_data){
@@ -19,7 +28,7 @@ void File_Open(GtkWidget* widget, struct Main_Data* main_data){
 
     action = GTK_FILE_CHOOSER_ACTION_OPEN;
 
-    dialog = gtk_file_chooser_dialog_new("Open File", GTK_WINDOW(main_data->window), action, "Cancel", GTK_RESPONSE_CANCEL, "OPEN", GTK_RESPONSE_ACCEPT, NULL);
+    dialog = gtk_file_chooser_dialog_new("Open File", GTK_WINDOW(main_data->window), action, "Cancel", GTK_RESPONSE_CANCEL, "Open", GTK_RESPONSE_ACCEPT, NULL);
 
     res = gtk_dialog_run(GTK_DIALOG(dialog));
 
@@ -43,7 +52,7 @@ void File_Open(GtkWidget* widget, struct Main_Data* main_data){
 
         fclose(fp);
 
-        g_free(filename);
+	    main_data->current_selected_file = filename;
 
         gtk_text_buffer_set_text(main_data->current_text_buffer, file_buffer, -1);   
     }
@@ -51,7 +60,20 @@ void File_Open(GtkWidget* widget, struct Main_Data* main_data){
 }
 
 void File_Save(GtkWidget* widget, struct Main_Data* main_data){
-    g_print("FILE SAVE");
+    if(File_Exist(main_data->current_selected_file)){
+        gchar* file_buffer;
+        FILE* fp;
+
+        file_buffer = Get_Text_In_Buffer(main_data->current_text_buffer);
+
+        fp = fopen(main_data->current_selected_file, "w");
+
+        fwrite(file_buffer, strlen(file_buffer), 1, fp);
+
+        fclose(fp);
+    }else{
+        File_Saveas(NULL, main_data);
+    }
 }
 
 void File_Saveas(GtkWidget* widget, struct Main_Data* main_data){
@@ -66,12 +88,7 @@ void File_Saveas(GtkWidget* widget, struct Main_Data* main_data){
 
     chooser = GTK_FILE_CHOOSER(dialog);
 
-    //FIXME::CHECK IF FILE HAS BEEN EDITED AND WRITE ACCORDINGLY
-    if(1){
-        gtk_file_chooser_set_current_name(chooser, "NoName");
-    }else{
-        gtk_file_chooser_set_filename(chooser, "NOTHING");
-    }
+    gtk_file_chooser_set_current_name(chooser, "Untitled Document");
 
     res = gtk_dialog_run(GTK_DIALOG(dialog));
 
@@ -90,7 +107,7 @@ void File_Saveas(GtkWidget* widget, struct Main_Data* main_data){
 
         fclose(fp);
 
-        g_free(filename);
+	    main_data->current_selected_file = filename;
     }
     gtk_widget_destroy(dialog);
 }

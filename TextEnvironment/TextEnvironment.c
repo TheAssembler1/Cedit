@@ -1,14 +1,14 @@
 #include "TextEnvironment.h"
 
-void Create_Text_Environment(GtkWidget* window_box, GtkTextBuffer** text_buffer){
+void Create_Text_Environment(GtkWidget* window_box, struct Main_Data* main_data){
     GtkWidget* text_view;
     GtkWidget* scrolled_window;
     GtkWidget* scrolled_box;
 
     text_view = gtk_text_view_new();
-    *text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_view));
+    main_data->current_text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_view));
 
-    gtk_text_buffer_set_text(*text_buffer, "", -1);
+    gtk_text_buffer_set_text(main_data->current_text_buffer, "", -1);
 
     scrolled_window = gtk_scrolled_window_new(NULL, NULL);
     gtk_box_pack_start(GTK_BOX(window_box), scrolled_window, TRUE, TRUE, 0);

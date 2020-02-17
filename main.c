@@ -21,7 +21,7 @@ static void activate(GtkApplication* app, gpointer user_data){
 
     Create_Header_Bar(&main_data, &window_box);
 
-    Create_Text_Environment(window_box, &main_data.current_text_buffer);
+    Create_Text_Environment(window_box, &main_data);
 
     gtk_widget_show_all(main_data.window);
 }
