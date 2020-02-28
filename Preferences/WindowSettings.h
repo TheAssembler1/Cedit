@@ -5,5 +5,6 @@
 #define WINDOW_HEIGHT 500
 #define WINDOW_BORDER 10
 #define WINDOW_TITLE "Cedit"
+#define WINDOW_ID "com.github.TheAssembler1.Cedit"
 
 #endif
