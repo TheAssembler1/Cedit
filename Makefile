@@ -1,5 +1,7 @@
 #gcc `pkg-config --cflags gtk+-3.0` -o Cedit main.c `pkg-config --libs gtk+-3.0`
-OBJS = main.o TextEnvironment/TextEnvironment.o
+OBJS = main.o  \
+	   TextEnvironment/TextEnvironment.o \
+	   LineNumbers/LineNumbers.o
 
 LDFLAGS = `pkg-config --cflags gtk+-3.0` 
 LDLIBSGTK = `pkg-config --libs gtk+-3.0`
@@ -11,6 +13,9 @@ main.o : main.c
 	cc $(LDFLAGS) -o $@ -c $^ $(LDLIBSGTK) 
 
 TextEnvironment/TextEnvironment.o : TextEnvironment/TextEnvironment.c
+	cc $(LDFLAGS) -o $@ -c $^ $(LDLIBSGTK) 
+
+LineNumbers/LineNumbers.o : LineNumbers/LineNumbers.c
 	cc $(LDFLAGS) -o $@ -c $^ $(LDLIBSGTK) 
 
 .PHONY : clean

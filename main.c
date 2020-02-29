@@ -1,11 +1,12 @@
 #include <gtk/gtk.h>
 #include "Preferences/WindowSettings.h"
 #include "TextEnvironment/TextEnvironment.h"
+#include "LineNumbers/LineNumbers.h"
 
 static void Activate(GtkApplication *app, gpointer user_data){
-  GtkWidget *window;
-  GtkWidget *scrolled_window;
-  GtkWidget *image;
+  GtkWidget* window;
+  GtkWidget* scrolled_window;
+  GtkWidget* text_view;
 
   window = gtk_application_window_new(app);
   gtk_window_set_title (GTK_WINDOW(window), WINDOW_TITLE);
@@ -16,9 +17,11 @@ static void Activate(GtkApplication *app, gpointer user_data){
   gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER_ALWAYS);
 
+  //Create_Line_Numbers(scrolled_window);
+
   gtk_container_add (GTK_CONTAINER (window), scrolled_window);
 
-  Create_Text_Environt(scrolled_window);
+  Create_Text_Environment(scrolled_window);
 
   gtk_widget_show_all (window);
 }

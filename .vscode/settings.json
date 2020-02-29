@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "syntaxhighlighting.h": "c"
+        "syntaxhighlighting.h": "c",
+        "atomic": "c",
+        "windowsettings.h": "c"
     }
 }

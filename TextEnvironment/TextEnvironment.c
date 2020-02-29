@@ -1,6 +1,6 @@
 #include "TextEnvironment.h"
 
-void Create_Text_Environt(GtkWidget* scrolled_window){
+void Create_Text_Environment(GtkWidget* scrolled_window){
     GtkWidget* text_view;
     GtkTextBuffer* text_buffer;
 
