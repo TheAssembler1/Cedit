@@ -1,9 +1,11 @@
 #include <gtk/gtk.h>
 #include "Preferences/WindowSettings.h"
 #include "TextEnvironment/TextEnvironment.h"
+#include "HeaderBar/HeaderBar.h"
 
 static void Activate(GtkApplication *app, gpointer user_data){
   GtkWidget* window;
+  GtkWidget* window_box;
   GtkWidget* scrolled_window;
   GtkWidget* text_view;
 
@@ -16,9 +18,8 @@ static void Activate(GtkApplication *app, gpointer user_data){
   gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER_ALWAYS);
 
-  gtk_container_add (GTK_CONTAINER(window), scrolled_window);
-
-  Create_Text_Environment(scrolled_window);
+  window_box = Create_Header_Bar(window);
+  Create_Text_Environment(window_box, scrolled_window);
 
   gtk_widget_show_all (window);
 }
