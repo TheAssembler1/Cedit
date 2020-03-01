@@ -34,5 +34,10 @@ GtkWidget* Create_Header_Bar(GtkWidget* window){
     gtk_menu_shell_append(GTK_MENU_SHELL(file_submenu), file_save_submenu_item);
     gtk_menu_shell_append(GTK_MENU_SHELL(file_submenu), file_saveas_submenu_item);
 
+    g_signal_connect(file_new_submenu_item, "activate", G_CALLBACK(File_New), NULL);
+    g_signal_connect(file_open_submenu_item, "activate", G_CALLBACK(File_Open), NULL);
+    g_signal_connect(file_save_submenu_item, "activate", G_CALLBACK(File_Save), NULL);
+    g_signal_connect(file_saveas_submenu_item, "activate", G_CALLBACK(File_Saveas), NULL);
+
     return window_box;
 }
