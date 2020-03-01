@@ -1,7 +1,7 @@
 #include <gtk/gtk.h>
+#include <gtksourceview/gtksource.h>
 #include "Preferences/WindowSettings.h"
 #include "TextEnvironment/TextEnvironment.h"
-#include "LineNumbers/LineNumbers.h"
 
 static void Activate(GtkApplication *app, gpointer user_data){
   GtkWidget* window;
@@ -16,8 +16,6 @@ static void Activate(GtkApplication *app, gpointer user_data){
   gtk_container_set_border_width(GTK_CONTAINER(scrolled_window), WINDOW_BORDER);
   gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER_ALWAYS);
-
-  //Create_Line_Numbers(scrolled_window);
 
   gtk_container_add (GTK_CONTAINER (window), scrolled_window);
 

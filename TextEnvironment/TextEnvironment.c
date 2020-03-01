@@ -2,10 +2,12 @@
 
 void Create_Text_Environment(GtkWidget* scrolled_window){
     GtkWidget* text_view;
-    GtkTextBuffer* text_buffer;
+    GtkSourceBuffer* text_buffer;
 
-    text_view = gtk_text_view_new();
-    text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_view));
-    gtk_text_buffer_set_text (text_buffer, "", -1);
+    text_buffer = gtk_source_buffer_new(NULL);
+    text_view = gtk_source_view_new_with_buffer (text_buffer);
+
+    gtk_source_view_set_show_line_numbers(text_view, TRUE);
+
     gtk_container_add(GTK_CONTAINER(scrolled_window), text_view);
 }
