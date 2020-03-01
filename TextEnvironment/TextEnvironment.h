@@ -3,6 +3,6 @@
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 
-void Create_Text_Environment(GtkWidget* window_box, GtkWidget* scrolled_window);
+void Create_Text_Environment(GtkWidget* window_box, GtkWidget* scrolled_window, GtkSourceBuffer** text_buffer;);
 
 #endif

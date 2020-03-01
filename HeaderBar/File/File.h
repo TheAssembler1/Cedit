@@ -1,6 +1,7 @@
 #ifndef FILE_H
 #define FILE_H
 #include <gtk/gtk.h>
+#include <gtksourceview/gtksource.h>
 
 void File_New(GtkWidget* widget, gpointer data);
 
