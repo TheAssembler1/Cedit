@@ -6,6 +6,6 @@
 #include "Edit/Edit.h"
 #include "Help/Help.h"
 
-GtkWidget* Create_Header_Bar(GtkWidget* window, GtkSourceBuffer text_buffer);
+GtkWidget* Create_Header_Bar(GtkWidget* window, GtkSourceBuffer* text_buffer);
 
 #endif
