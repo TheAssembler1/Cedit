@@ -2,6 +2,7 @@
 
 static void Create_File_Menu(GtkWidget* header_bar, GtkSourceBuffer* text_buffer);
 static void Create_Edit_Menu(GtkWidget* header_bar);
+static void Create_Help_Menu(GtkWidget* header_bar);
 
 GtkWidget* Create_Header_Bar(GtkWidget* window, GtkSourceBuffer text_buffer){
     GtkWidget* header_bar;
@@ -15,6 +16,7 @@ GtkWidget* Create_Header_Bar(GtkWidget* window, GtkSourceBuffer text_buffer){
 
     Create_File_Menu(header_bar, &text_buffer);
     Create_Edit_Menu(header_bar);
+    Create_Help_Menu(header_bar);
 
     return window_box;
 }
@@ -79,4 +81,34 @@ static void Create_Edit_Menu(GtkWidget* header_bar){
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_submenu), edit_cut_submenu_item);
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_submenu), edit_copy_submenu_item);
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_submenu), edit_paste_submenu_item);
+
+    g_signal_connect(edit_undo_submenu_item, "activate", G_CALLBACK(Edit_Undo), NULL);
+    g_signal_connect(edit_redo_submenu_item, "activate", G_CALLBACK(Edit_Redo), NULL);
+    g_signal_connect(edit_cut_submenu_item, "activate", G_CALLBACK(Edit_Cut), NULL);
+    g_signal_connect(edit_copy_submenu_item, "activate", G_CALLBACK(Edit_Copy), NULL);
+    g_signal_connect(edit_paste_submenu_item, "activate", G_CALLBACK(Edit_Paste), NULL);
+}
+
+static void Create_Help_Menu(GtkWidget* header_bar){
+    GtkWidget* help_item;
+    GtkWidget* help_submenu;
+    GtkWidget* help_features_submenu_item;
+    GtkWidget* help_source_submenu_item;
+
+    help_item = gtk_menu_item_new_with_label("Help");
+
+    help_submenu = gtk_menu_new();
+
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(help_item), help_submenu);
+
+    gtk_menu_shell_append(GTK_MENU_SHELL(header_bar), help_item);
+
+    help_features_submenu_item = gtk_menu_item_new_with_label("Features");
+    help_source_submenu_item = gtk_menu_item_new_with_label("Source");
+
+    gtk_menu_shell_append(GTK_MENU_SHELL(help_submenu), help_features_submenu_item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(help_submenu), help_source_submenu_item);
+
+    g_signal_connect(help_features_submenu_item, "activate", G_CALLBACK(Help_Features), NULL);
+    g_signal_connect(help_source_submenu_item, "activate", G_CALLBACK(Help_Source), NULL);
 }
