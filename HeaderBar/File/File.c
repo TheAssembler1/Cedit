@@ -4,7 +4,8 @@ static void Done_Saving();
 static void Done_Loading();
 
 void File_New(GtkWidget* widget, struct Main_Data* main_data){
-    File_Save(NULL, main_data);
+    //FIXME::WE AREN"T SAVING YET MAKE A SEPERATE CALL BACK FUNCTION TO SAVE BUFFER AND THEN CREATE NEW DOCUEMENT
+    //File_Save(NULL, main_data);
     gtk_text_buffer_set_text(GTK_TEXT_BUFFER(main_data->text_buffer), "", -1);
 }
 
@@ -17,7 +18,8 @@ void File_Open(GtkWidget* widget, struct Main_Data* main_data){
     gchar* file_location;
     gint res;
 
-    File_Save(NULL, main_data);
+    //FIXME:: FIX FILE SAVE WITH CALLBACK THEN IMPLEMENT THIS
+    //File_Save(NULL, main_data);
 
     action = GTK_FILE_CHOOSER_ACTION_SAVE;
 

@@ -1,7 +1,7 @@
 #include "HeaderBar.h"
 
 static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data);
-static void Create_Edit_Menu(GtkWidget* header_bar, GtkSourceBuffer* text_buffer);
+static void Create_Edit_Menu(GtkWidget* header_bar, struct Main_Data* main_data);
 static void Create_Help_Menu(GtkWidget* header_bar);
 
 GtkWidget* Create_Header_Bar(struct Main_Data* main_data){
@@ -15,7 +15,7 @@ GtkWidget* Create_Header_Bar(struct Main_Data* main_data){
     gtk_box_pack_start(GTK_BOX(window_box), header_bar, FALSE, FALSE, 0);
 
     Create_File_Menu(header_bar, main_data);
-    Create_Edit_Menu(header_bar, main_data->text_buffer);
+    Create_Edit_Menu(header_bar, main_data);
     Create_Help_Menu(header_bar);
 
     return window_box;
@@ -53,7 +53,7 @@ static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data)
     g_signal_connect(file_saveas_submenu_item, "activate", G_CALLBACK(File_Saveas), main_data);
 }
 
-static void Create_Edit_Menu(GtkWidget* header_bar, GtkSourceBuffer* text_buffer){
+static void Create_Edit_Menu(GtkWidget* header_bar, struct Main_Data* main_data){
     GtkWidget* edit_item;
     GtkWidget* edit_submenu;
     GtkWidget* edit_undo_submenu_item;
@@ -82,11 +82,11 @@ static void Create_Edit_Menu(GtkWidget* header_bar, GtkSourceBuffer* text_buffer
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_submenu), edit_copy_submenu_item);
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_submenu), edit_paste_submenu_item);
 
-    g_signal_connect(edit_undo_submenu_item, "activate", G_CALLBACK(Edit_Undo), text_buffer);
-    g_signal_connect(edit_redo_submenu_item, "activate", G_CALLBACK(Edit_Redo), text_buffer);
-    g_signal_connect(edit_cut_submenu_item, "activate", G_CALLBACK(Edit_Cut), text_buffer);
-    g_signal_connect(edit_copy_submenu_item, "activate", G_CALLBACK(Edit_Copy), text_buffer);
-    g_signal_connect(edit_paste_submenu_item, "activate", G_CALLBACK(Edit_Paste), text_buffer);
+    g_signal_connect(edit_undo_submenu_item, "activate", G_CALLBACK(Edit_Undo), main_data->text_buffer);
+    g_signal_connect(edit_redo_submenu_item, "activate", G_CALLBACK(Edit_Redo), main_data->text_buffer);
+    g_signal_connect(edit_cut_submenu_item, "activate", G_CALLBACK(Edit_Cut), main_data);
+    g_signal_connect(edit_copy_submenu_item, "activate", G_CALLBACK(Edit_Copy), main_data);
+    g_signal_connect(edit_paste_submenu_item, "activate", G_CALLBACK(Edit_Paste), main_data);
 }
 
 static void Create_Help_Menu(GtkWidget* header_bar){

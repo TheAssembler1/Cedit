@@ -23,7 +23,7 @@ static void Activate(GtkApplication *app, gpointer user_data){
   main_data.text_buffer = gtk_source_buffer_new(NULL);
 
   window_box = Create_Header_Bar(&main_data);
-  Create_Text_Environment(window_box, scrolled_window, main_data.text_buffer);
+  Create_Text_Environment(window_box, scrolled_window, &main_data);
 
   gtk_widget_show_all(main_data.window);
 }
