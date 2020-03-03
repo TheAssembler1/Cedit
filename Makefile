@@ -1,5 +1,5 @@
 #gcc `pkg-config --cflags gtk+-3.0` -o Cedit main.c pkg-config`pkg-config --libs gtk+-3.0`
-OBJS = main.o  \
+OBJS = Main.o  \
 	   TextEnvironment/TextEnvironment.o \
 	   HeaderBar/HeaderBar.o \
 	   HeaderBar/File/File.o \
@@ -12,7 +12,7 @@ LDLIBS = `pkg-config --libs gtk+-3.0 gtksourceview-3.0`
 Cedit : $(OBJS)
 	cc $(LDFLAGS) -o $@ $^ $(LDLIBS) 
 
-main.o : main.c
+Main.o : Main.c
 	cc $(LDFLAGS) -o $@ -c $^ $(LDLIBS) 
 
 TextEnvironment/TextEnvironment.o : TextEnvironment/TextEnvironment.c

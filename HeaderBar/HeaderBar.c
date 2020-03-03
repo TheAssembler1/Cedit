@@ -1,27 +1,27 @@
 #include "HeaderBar.h"
 
-static void Create_File_Menu(GtkWidget* header_bar, GtkSourceBuffer* text_buffer);
+static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data);
 static void Create_Edit_Menu(GtkWidget* header_bar, GtkSourceBuffer* text_buffer);
 static void Create_Help_Menu(GtkWidget* header_bar);
 
-GtkWidget* Create_Header_Bar(GtkWidget* window, GtkSourceBuffer* text_buffer){
+GtkWidget* Create_Header_Bar(struct Main_Data* main_data){
     GtkWidget* header_bar;
     GtkWidget* window_box;
 
     window_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     header_bar = gtk_menu_bar_new();
 
-    gtk_container_add(GTK_CONTAINER(window), window_box);
+    gtk_container_add(GTK_CONTAINER(main_data->window), window_box);
     gtk_box_pack_start(GTK_BOX(window_box), header_bar, FALSE, FALSE, 0);
 
-    Create_File_Menu(header_bar, text_buffer);
-    Create_Edit_Menu(header_bar, text_buffer);
+    Create_File_Menu(header_bar, main_data);
+    Create_Edit_Menu(header_bar, main_data->text_buffer);
     Create_Help_Menu(header_bar);
 
     return window_box;
 }
 
-static void Create_File_Menu(GtkWidget* header_bar, GtkSourceBuffer* text_buffer){
+static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data){
     GtkWidget* file_item;
     GtkWidget* file_submenu;
     GtkWidget* file_new_submenu_item;
@@ -47,10 +47,10 @@ static void Create_File_Menu(GtkWidget* header_bar, GtkSourceBuffer* text_buffer
     gtk_menu_shell_append(GTK_MENU_SHELL(file_submenu), file_save_submenu_item);
     gtk_menu_shell_append(GTK_MENU_SHELL(file_submenu), file_saveas_submenu_item);
 
-    g_signal_connect(file_new_submenu_item, "activate", G_CALLBACK(File_New), text_buffer);
-    g_signal_connect(file_open_submenu_item, "activate", G_CALLBACK(File_Open), text_buffer);
-    g_signal_connect(file_save_submenu_item, "activate", G_CALLBACK(File_Save), text_buffer);
-    g_signal_connect(file_saveas_submenu_item, "activate", G_CALLBACK(File_Saveas), text_buffer);
+    g_signal_connect(file_new_submenu_item, "activate", G_CALLBACK(File_New), main_data);
+    g_signal_connect(file_open_submenu_item, "activate", G_CALLBACK(File_Open), main_data);
+    g_signal_connect(file_save_submenu_item, "activate", G_CALLBACK(File_Save), main_data);
+    g_signal_connect(file_saveas_submenu_item, "activate", G_CALLBACK(File_Saveas), main_data);
 }
 
 static void Create_Edit_Menu(GtkWidget* header_bar, GtkSourceBuffer* text_buffer){

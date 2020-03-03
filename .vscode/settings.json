@@ -2,6 +2,7 @@
     "files.associations": {
         "syntaxhighlighting.h": "c",
         "atomic": "c",
-        "windowsettings.h": "c"
+        "windowsettings.h": "c",
+        "headerbar.h": "c"
     }
 }
