@@ -4,7 +4,8 @@ static void Done_Saving();
 static void Done_Loading();
 
 void File_New(GtkWidget* widget, struct Main_Data* main_data){
-    g_print("FILE NEW\n");
+    File_Save(NULL, main_data);
+    gtk_text_buffer_set_text(GTK_TEXT_BUFFER(main_data->text_buffer), "", -1);
 }
 
 void File_Open(GtkWidget* widget, struct Main_Data* main_data){
