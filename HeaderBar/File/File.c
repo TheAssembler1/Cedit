@@ -1,9 +1,5 @@
 #include "File.h"
 
-static void Done_Saving_New(struct Main_Data* main_data);
-static void Done_Saving();
-static void Done_Loading();
-
 void File_New(GtkWidget* widget, struct Main_Data* main_data){
     gtk_text_buffer_set_text(GTK_TEXT_BUFFER(main_data->text_buffer), "", -1); 
     main_data->source_file = gtk_source_file_new();

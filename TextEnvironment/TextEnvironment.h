@@ -3,6 +3,7 @@
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 #include "../MainData.h"
+#include "../Preferences/TextSettings.h"
 
 void Create_Text_Environment(GtkWidget* window_box, GtkWidget* scrolled_window, struct Main_Data* main_data);
 

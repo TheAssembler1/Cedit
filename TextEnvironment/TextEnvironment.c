@@ -8,7 +8,7 @@ void Create_Text_Environment(GtkWidget* window_box, GtkWidget* scrolled_window, 
     GdkDisplay* display;
 
     c_language_manager = gtk_source_language_manager_get_default();
-    c_language = gtk_source_language_manager_get_language(c_language_manager, "c");
+    c_language = gtk_source_language_manager_get_language(c_language_manager, DEFAULT_LANGUAGE);
 
     gtk_source_buffer_set_language(GTK_SOURCE_BUFFER(main_data->text_buffer), c_language);
     text_view = gtk_source_view_new_with_buffer(main_data->text_buffer);
