@@ -58,6 +58,7 @@ static void Create_Edit_Menu(GtkWidget* header_bar, struct Main_Data* main_data)
     GtkWidget* edit_cut_submenu_item;
     GtkWidget* edit_copy_submenu_item;
     GtkWidget* edit_paste_submenu_item;
+    GtkWidget* seperator;
 
     edit_item = gtk_menu_item_new_with_label("Edit");
 
@@ -72,9 +73,11 @@ static void Create_Edit_Menu(GtkWidget* header_bar, struct Main_Data* main_data)
     edit_cut_submenu_item = gtk_menu_item_new_with_label("Cut");
     edit_copy_submenu_item = gtk_menu_item_new_with_label("Copy");
     edit_paste_submenu_item = gtk_menu_item_new_with_label("Paste");
+    seperator = gtk_separator_menu_item_new();
 
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_submenu), edit_undo_submenu_item);
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_submenu), edit_redo_submenu_item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(edit_submenu), seperator);
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_submenu), edit_cut_submenu_item);
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_submenu), edit_copy_submenu_item);
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_submenu), edit_paste_submenu_item);

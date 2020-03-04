@@ -19,5 +19,6 @@ void Edit_Copy(GtkWidget* widget, struct Main_Data* main_data){
 }
 
 void Edit_Paste(GtkWidget* widget, struct Main_Data* main_data){
+    //FIXME::PRINTS NULL IF CLIPBOARD IS EMPTY
     gtk_text_buffer_paste_clipboard(GTK_TEXT_BUFFER(main_data->text_buffer), main_data->clipboard, NULL, TRUE);
 }

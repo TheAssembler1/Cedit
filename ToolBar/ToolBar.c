@@ -1,17 +1,31 @@
 #include "ToolBar.h"
 
+static void Create_File_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_bar);
+static void Create_Edit_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_bar);
+
 void Create_Tool_Bar(struct Main_Data* main_data){
     GtkWidget* tool_bar;
+
+    tool_bar = gtk_toolbar_new();
+
+    Create_File_Tool_Items(main_data, tool_bar);
+    Create_Edit_Tool_Items(main_data, tool_bar);
+
+    gtk_box_pack_start(GTK_BOX(main_data->window_box), tool_bar, FALSE, FALSE, 0);
+}
+
+static void Create_File_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_bar){
     GtkToolItem* file_new;
     GtkToolItem* file_open;
     GtkToolItem* file_save;
     GtkToolItem* file_saveas;
+    GtkToolItem* seperator;
     GtkWidget* file_new_button;
     GtkWidget* file_open_button;
     GtkWidget* file_save_button;
     GtkWidget* file_savas;
 
-    tool_bar = gtk_toolbar_new();
+    seperator = gtk_separator_tool_item_new();
 
     file_new_button = gtk_image_new_from_icon_name("document-new", 0);
     file_open_button = gtk_image_new_from_icon_name("document-open", 0);
@@ -27,11 +41,51 @@ void Create_Tool_Bar(struct Main_Data* main_data){
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), file_open, -1);
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), file_save, -1);
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), file_saveas, -1);
+    gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), seperator, -1); 
 
     g_signal_connect(file_new, "clicked", G_CALLBACK(File_New_Toolbar), main_data);
     g_signal_connect(file_open, "clicked", G_CALLBACK(File_Open_Toolbar), main_data);
     g_signal_connect(file_save, "clicked", G_CALLBACK(File_Save_Toolbar), main_data);
     g_signal_connect(file_saveas, "clicked", G_CALLBACK(File_Saveas_Toolbar), main_data);
+}
 
-    gtk_box_pack_start(GTK_BOX(main_data->window_box), tool_bar, FALSE, FALSE, 0);
+static void Create_Edit_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_bar){
+    GtkToolItem* Edit_Undo;
+    GtkToolItem* Edit_Redo;
+    GtkToolItem* Edit_Cut;
+    GtkToolItem* Edit_Copy;
+    GtkToolItem* Edit_Paste;
+    GtkToolItem* seperator;
+    GtkWidget* Edit_Undo_Button;
+    GtkWidget* Edit_Redo_Button;
+    GtkWidget* Edit_Cut_Button;
+    GtkWidget* Edit_Copy_Button;
+    GtkWidget* Edit_Paste_Button;
+
+    seperator = gtk_separator_tool_item_new();
+
+    Edit_Undo_Button = gtk_image_new_from_icon_name("edit-undo", 0);
+    Edit_Redo_Button = gtk_image_new_from_icon_name("edit-redo", 0);
+    Edit_Cut_Button = gtk_image_new_from_icon_name("edit-cut", 0);
+    Edit_Copy_Button = gtk_image_new_from_icon_name("edit-copy", 0);
+    Edit_Paste_Button = gtk_image_new_from_icon_name("edit-paste", 0);
+
+    Edit_Undo = gtk_tool_button_new(Edit_Undo_Button, NULL);
+    Edit_Redo = gtk_tool_button_new(Edit_Redo_Button, NULL);
+    Edit_Cut = gtk_tool_button_new(Edit_Cut_Button, NULL);
+    Edit_Copy = gtk_tool_button_new(Edit_Copy_Button, NULL);
+    Edit_Paste = gtk_tool_button_new(Edit_Paste_Button, NULL);
+
+    gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Undo, -1);
+    gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Redo, -1);
+    gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Cut, -1);
+    gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Copy, -1);
+    gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Paste, -1);
+    gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), seperator, -1);
+
+    g_signal_connect(Edit_Undo, "clicked", G_CALLBACK(Edit_Undo_Toolbar), main_data->text_buffer);
+    g_signal_connect(Edit_Redo, "clicked", G_CALLBACK(Edit_Redo_Toolbar), main_data->text_buffer);
+    g_signal_connect(Edit_Cut, "clicked", G_CALLBACK(Edit_Cut_Toolbar), main_data);
+    g_signal_connect(Edit_Copy, "clicked", G_CALLBACK(Edit_Copy_Toolbar), main_data);
+    g_signal_connect(Edit_Paste, "clicked", G_CALLBACK(Edit_Paste_Toolbar), main_data);
 }
