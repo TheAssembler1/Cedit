@@ -28,7 +28,7 @@ static void Activate(GtkApplication *app, gpointer user_data){
   main_data.about_window = gtk_about_dialog_new();
   
   Create_Header_Bar(&main_data);
-  Create_Tool_Bar(main_data.window_box);
+  Create_Tool_Bar(&main_data);
   Create_Text_Environment(main_data.window_box, scrolled_window, &main_data);
 
   gtk_widget_show_all(main_data.window);
