@@ -12,6 +12,8 @@ static void Activate(GtkApplication *app, gpointer user_data){
   GtkWidget* scrolled_window;
 
   main_data.window = gtk_application_window_new(app);
+  GdkPixbuf* letter_logo = gdk_pixbuf_new_from_file (WINDOW_LETTER_LOGO, NULL);
+  gtk_window_set_icon(GTK_WINDOW(main_data.window), letter_logo);
   gtk_window_set_title (GTK_WINDOW(main_data.window), WINDOW_TITLE);
   gtk_window_set_default_size (GTK_WINDOW(main_data.window), WINDOW_WIDTH, WINDOW_HEIGHT);
 
