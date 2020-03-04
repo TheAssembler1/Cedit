@@ -2,7 +2,7 @@
 
 static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data);
 static void Create_Edit_Menu(GtkWidget* header_bar, struct Main_Data* main_data);
-static void Create_Help_Menu(GtkWidget* header_bar, struct Main_Data* main_data);
+static void Create_Help_Menu(GtkWidget* header_bar, GtkWidget* window);
 
 GtkWidget* Create_Header_Bar(struct Main_Data* main_data){
     GtkWidget* header_bar;
@@ -16,7 +16,7 @@ GtkWidget* Create_Header_Bar(struct Main_Data* main_data){
 
     Create_File_Menu(header_bar, main_data);
     Create_Edit_Menu(header_bar, main_data);
-    Create_Help_Menu(header_bar, main_data);
+    Create_Help_Menu(header_bar, main_data->window);
 
     return window_box;
 }
@@ -89,7 +89,7 @@ static void Create_Edit_Menu(GtkWidget* header_bar, struct Main_Data* main_data)
     g_signal_connect(edit_paste_submenu_item, "activate", G_CALLBACK(Edit_Paste), main_data);
 }
 
-static void Create_Help_Menu(GtkWidget* header_bar, struct Main_Data* main_data){
+static void Create_Help_Menu(GtkWidget* header_bar, GtkWidget* window){
     GtkWidget* help_item;
     GtkWidget* help_submenu;
     GtkWidget* help_about_submenu_item;
@@ -106,5 +106,5 @@ static void Create_Help_Menu(GtkWidget* header_bar, struct Main_Data* main_data)
 
     gtk_menu_shell_append(GTK_MENU_SHELL(help_submenu), help_about_submenu_item);
 
-    g_signal_connect(help_about_submenu_item, "activate", G_CALLBACK(Help_About), main_data);
+    g_signal_connect(help_about_submenu_item, "activate", G_CALLBACK(Help_About), window);
 }

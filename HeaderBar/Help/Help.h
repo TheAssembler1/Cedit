@@ -3,6 +3,6 @@
 #include <gtk/gtk.h>
 #include "../../MainData.h"
 
-void Help_About(GtkWidget* widget, struct Main_Data* main_data);
+void Help_About(GtkWidget* widget, GtkWidget* window);
 
 #endif
