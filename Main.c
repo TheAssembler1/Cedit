@@ -4,13 +4,14 @@
 #include "TextEnvironment/TextEnvironment.h"
 #include "HeaderBar/HeaderBar.h"
 #include "ToolBar/ToolBar.h"
+#include "SideBar/SideBar.h"
 #include "MainData.h"
 
 struct Main_Data main_data;
 
 static void Activate(GtkApplication *app, gpointer user_data){
-  GtkWidget* window_box;
   GtkWidget* scrolled_window;
+  GtkWidget* sub_window_box;
 
   main_data.window = gtk_application_window_new(app);
   GdkPixbuf* letter_logo = gdk_pixbuf_new_from_file (WINDOW_LETTER_LOGO, NULL);
@@ -24,12 +25,16 @@ static void Activate(GtkApplication *app, gpointer user_data){
   gtk_window_set_position(GTK_WINDOW(main_data.window), GTK_WIN_POS_CENTER_ALWAYS);
 
   main_data.text_buffer = gtk_source_buffer_new(NULL);
-
   main_data.about_window = gtk_about_dialog_new();
   
   Create_Header_Bar(&main_data);
   Create_Tool_Bar(&main_data);
-  Create_Text_Environment(main_data.window_box, scrolled_window, &main_data);
+
+  sub_window_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+  gtk_box_pack_start(GTK_BOX(main_data.window_box), sub_window_box, TRUE, TRUE, 0);
+
+  //Create_Side_Bar(sub_window_box);
+  Create_Text_Environment(sub_window_box, scrolled_window, &main_data);
 
   gtk_widget_show_all(main_data.window);
 }

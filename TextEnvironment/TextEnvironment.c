@@ -1,7 +1,6 @@
 #include "TextEnvironment.h"
 
-void Create_Text_Environment(GtkWidget* window_box, GtkWidget* scrolled_window, struct Main_Data* main_data){
-    GtkWidget* scrolled_window_box;
+void Create_Text_Environment(GtkWidget* sub_window_box, GtkWidget* scrolled_window, struct Main_Data* main_data){
     GtkWidget* text_view;
     GtkSourceLanguage* c_language;
     GtkSourceLanguageManager* c_language_manager;
@@ -17,7 +16,7 @@ void Create_Text_Environment(GtkWidget* window_box, GtkWidget* scrolled_window, 
     gtk_source_view_set_highlight_current_line(GTK_SOURCE_VIEW(text_view), TRUE);
     gtk_source_view_set_auto_indent(GTK_SOURCE_VIEW(text_view), TRUE);
 
-    gtk_box_pack_start(GTK_BOX(window_box), scrolled_window, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(sub_window_box), scrolled_window, TRUE, TRUE, 0);
     gtk_container_add(GTK_CONTAINER(scrolled_window), text_view);
 
     display = gdk_display_get_default();
