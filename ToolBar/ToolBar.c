@@ -43,6 +43,11 @@ static void Create_File_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), file_saveas, -1);
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), seperator, -1); 
 
+    gtk_tool_item_set_tooltip_text(file_new, "File New");
+    gtk_tool_item_set_tooltip_text(file_open, "File Open");
+    gtk_tool_item_set_tooltip_text(file_save, "File Save");
+    gtk_tool_item_set_tooltip_text(file_saveas, "File Save As...");
+
     g_signal_connect(file_new, "clicked", G_CALLBACK(File_New_Toolbar), main_data);
     g_signal_connect(file_open, "clicked", G_CALLBACK(File_Open_Toolbar), main_data);
     g_signal_connect(file_save, "clicked", G_CALLBACK(File_Save_Toolbar), main_data);
@@ -82,6 +87,12 @@ static void Create_Edit_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Cut, -1);
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Copy, -1);
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Paste, -1);
+
+    gtk_tool_item_set_tooltip_text(Edit_Undo, "Undo");
+    gtk_tool_item_set_tooltip_text(Edit_Redo, "Redo");
+    gtk_tool_item_set_tooltip_text(Edit_Cut, "Cut");
+    gtk_tool_item_set_tooltip_text(Edit_Copy, "Copy");
+    gtk_tool_item_set_tooltip_text(Edit_Paste, "Paste");
 
     g_signal_connect(Edit_Undo, "clicked", G_CALLBACK(Edit_Undo_Toolbar), main_data->text_buffer);
     g_signal_connect(Edit_Redo, "clicked", G_CALLBACK(Edit_Redo_Toolbar), main_data->text_buffer);
