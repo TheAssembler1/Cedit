@@ -8,6 +8,7 @@ struct Main_Data{
     GtkSourceBuffer* text_buffer;
     GtkSourceFile* source_file;
     GtkClipboard* clipboard;
+    GtkWidget* about_window;
 };
 
 #endif

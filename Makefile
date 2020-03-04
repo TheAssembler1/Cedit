@@ -4,7 +4,8 @@ OBJS = Main.o  \
 	   HeaderBar/HeaderBar.o \
 	   HeaderBar/File/File.o \
 	   HeaderBar/Edit/Edit.o \
-	   HeaderBar/Help/Help.o
+	   HeaderBar/Help/Help.o \
+	   AboutWindow/AboutWindow.o
 
 LDFLAGS = `pkg-config --cflags gtk+-3.0` 
 LDLIBS = `pkg-config --libs gtk+-3.0 gtksourceview-3.0` 
@@ -31,6 +32,9 @@ HeaderBar/Edit/Edit.o : HeaderBar/Edit/Edit.c
 	cc $(LDFLAGS) -o $@ -c $^ $(LDLIBS)
 
 HeaderBar/Help/Help.o : HeaderBar/Help/Help.c
+	cc $(LDFLAGS) -o $@ -c $^ $(LDLIBS)
+
+AboutWindow/AboutWindow.o : AboutWindow/AboutWindow.c
 	cc $(LDFLAGS) -o $@ -c $^ $(LDLIBS)
 
 .PHONY : clean

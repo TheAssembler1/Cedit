@@ -1,9 +1,5 @@
 #include "Help.h"
 
-void Help_Features(GtkWidget* widget, gpointer data){
-    g_print("HELP FEATURES\n");
-}
-
-void Help_Source(GtkWidget* widget, gpointer data){
-    g_print("HELP SOURCE\n");
+void Help_About(GtkWidget* widget, struct Main_Data* main_data){
+    gtk_show_about_dialog(GTK_WINDOW(main_data->window), NULL, NULL);
 }

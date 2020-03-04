@@ -3,6 +3,7 @@
 #include "Preferences/WindowSettings.h"
 #include "TextEnvironment/TextEnvironment.h"
 #include "HeaderBar/HeaderBar.h"
+#include "AboutWindow/AboutWindow.h"
 #include "MainData.h"
 
 struct Main_Data main_data;
@@ -21,7 +22,7 @@ static void Activate(GtkApplication *app, gpointer user_data){
   gtk_window_set_position(GTK_WINDOW(main_data.window), GTK_WIN_POS_CENTER_ALWAYS);
 
   main_data.text_buffer = gtk_source_buffer_new(NULL);
-
+  
   window_box = Create_Header_Bar(&main_data);
   Create_Text_Environment(window_box, scrolled_window, &main_data);
 
