@@ -6,19 +6,16 @@ static void Create_Help_Menu(GtkWidget* header_bar, GtkWidget* window);
 
 GtkWidget* Create_Header_Bar(struct Main_Data* main_data){
     GtkWidget* header_bar;
-    GtkWidget* window_box;
 
-    window_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    main_data->window_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     header_bar = gtk_menu_bar_new();
 
-    gtk_container_add(GTK_CONTAINER(main_data->window), window_box);
-    gtk_box_pack_start(GTK_BOX(window_box), header_bar, FALSE, FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(main_data->window), main_data->window_box);
+    gtk_box_pack_start(GTK_BOX(main_data->window_box), header_bar, FALSE, FALSE, 0);
 
     Create_File_Menu(header_bar, main_data);
     Create_Edit_Menu(header_bar, main_data);
     Create_Help_Menu(header_bar, main_data->window);
-
-    return window_box;
 }
 
 static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data){

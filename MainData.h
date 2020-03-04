@@ -9,6 +9,7 @@ struct Main_Data{
     GtkSourceFile* source_file;
     GtkClipboard* clipboard;
     GtkWidget* about_window;
+    GtkWidget* window_box;
 };
 
 #endif

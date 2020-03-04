@@ -3,6 +3,7 @@
         "syntaxhighlighting.h": "c",
         "atomic": "c",
         "windowsettings.h": "c",
-        "headerbar.h": "c"
+        "headerbar.h": "c",
+        "toolbar.h": "c"
     }
 }
