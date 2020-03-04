@@ -78,10 +78,10 @@ static void Create_Edit_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_
 
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Undo, -1);
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Redo, -1);
+    gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), seperator, -1);
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Cut, -1);
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Copy, -1);
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Paste, -1);
-    gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), seperator, -1);
 
     g_signal_connect(Edit_Undo, "clicked", G_CALLBACK(Edit_Undo_Toolbar), main_data->text_buffer);
     g_signal_connect(Edit_Redo, "clicked", G_CALLBACK(Edit_Redo_Toolbar), main_data->text_buffer);

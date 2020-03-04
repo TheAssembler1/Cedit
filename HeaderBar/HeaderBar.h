@@ -7,6 +7,7 @@
 #include "File/File.h"
 #include "Edit/Edit.h"
 #include "Help/Help.h"
+#include "Settings/Settings.h"
 
 GtkWidget* Create_Header_Bar(struct Main_Data* main_data);
 
