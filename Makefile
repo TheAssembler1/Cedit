@@ -11,7 +11,7 @@ OBJS = Main.o  \
 	   SideBar/SideBar.o
 
 LDFLAGS = `pkg-config --cflags gtk+-3.0` 
-LDLIBS = `pkg-config --libs gtk+-3.0 gtksourceview-3.0` 
+LDLIBS = `pkg-config --libs gtk+-3.0 gtksourceview-3.0 vte-2.91` 
 
 Cedit : $(OBJS)
 	cc $(LDFLAGS) -o $@ $^ $(LDLIBS) 

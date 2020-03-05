@@ -1,11 +1,13 @@
 #include "TextEnvironment.h"
 
-void Create_Text_Environment(GtkWidget* sub_window_box, GtkWidget* scrolled_window, struct Main_Data* main_data){
+void Create_Text_Environment(GtkWidget* sub_window_box, GtkWidget* scrolled_window, struct Main_Data* main_data, char **argv){
     GtkWidget* text_view;
+    GtkWidget* text_terminal_box;
     GtkSourceLanguage* c_language;
     GtkSourceLanguageManager* c_language_manager;
     GdkDisplay* display;
     GtkWidget* source_map;
+    GtkWidget* terminal;
 
     c_language_manager = gtk_source_language_manager_get_default();
     c_language = gtk_source_language_manager_get_language(c_language_manager, DEFAULT_LANGUAGE);
@@ -17,7 +19,28 @@ void Create_Text_Environment(GtkWidget* sub_window_box, GtkWidget* scrolled_wind
     gtk_source_view_set_highlight_current_line(GTK_SOURCE_VIEW(text_view), TRUE);
     gtk_source_view_set_auto_indent(GTK_SOURCE_VIEW(text_view), TRUE);
 
-    gtk_box_pack_start(GTK_BOX(sub_window_box), scrolled_window, TRUE, TRUE, 0);
+    text_terminal_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+
+    gtk_box_pack_start(GTK_BOX(sub_window_box), text_terminal_box, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(text_terminal_box), scrolled_window, TRUE, TRUE, 0);
+
+    terminal = vte_terminal_new();
+    gchar **envp = g_get_environ();
+    gchar **command = (gchar *[]){g_strdup(g_environ_getenv(envp, "SHELL")), NULL };
+    g_strfreev(envp);
+    vte_terminal_spawn_async(VTE_TERMINAL(terminal),
+        VTE_PTY_DEFAULT,
+        NULL,       /* working directory  */
+        command,    /* command */
+        NULL,       /* environment */
+        0,          /* spawn flags */
+        NULL, NULL, /* child setup */
+        NULL,       /* child pid */
+        -1,         /* timeout */
+        NULL, NULL, NULL);
+    vte_terminal_set_size(VTE_TERMINAL(terminal), 1, 5);
+    gtk_box_pack_start(GTK_BOX(text_terminal_box), terminal, FALSE, FALSE, 0);
+
     gtk_container_add(GTK_CONTAINER(scrolled_window), text_view);
 
     source_map = gtk_source_map_new();

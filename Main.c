@@ -9,7 +9,7 @@
 
 struct Main_Data main_data;
 
-static void Activate(GtkApplication *app, gpointer user_data){
+static void Activate(GtkApplication *app, char **argv){
   GtkWidget* scrolled_window;
   GtkWidget* sub_window_box;
 
@@ -34,7 +34,7 @@ static void Activate(GtkApplication *app, gpointer user_data){
   gtk_box_pack_start(GTK_BOX(main_data.window_box), sub_window_box, TRUE, TRUE, 0);
 
   Create_Side_Bar(sub_window_box);
-  Create_Text_Environment(sub_window_box, scrolled_window, &main_data); 
+  Create_Text_Environment(sub_window_box, scrolled_window, &main_data, argv); 
 
   gtk_widget_show_all(main_data.window);
 }
@@ -50,7 +50,7 @@ int main(int argc, char **argv){
   int status;
 
   app = gtk_application_new(WINDOW_ID, G_APPLICATION_FLAGS_NONE);
-  g_signal_connect(app, "activate", G_CALLBACK(Activate), NULL);
+  g_signal_connect(app, "activate", G_CALLBACK(Activate), argv);
   status = g_application_run(G_APPLICATION(app), argc, argv);
   g_object_unref(app);
 
