@@ -5,6 +5,7 @@ void Create_Text_Environment(GtkWidget* sub_window_box, GtkWidget* scrolled_wind
     GtkSourceLanguage* c_language;
     GtkSourceLanguageManager* c_language_manager;
     GdkDisplay* display;
+    GtkWidget* source_map;
 
     c_language_manager = gtk_source_language_manager_get_default();
     c_language = gtk_source_language_manager_get_language(c_language_manager, DEFAULT_LANGUAGE);
@@ -18,6 +19,10 @@ void Create_Text_Environment(GtkWidget* sub_window_box, GtkWidget* scrolled_wind
 
     gtk_box_pack_start(GTK_BOX(sub_window_box), scrolled_window, TRUE, TRUE, 0);
     gtk_container_add(GTK_CONTAINER(scrolled_window), text_view);
+
+    source_map = gtk_source_map_new();
+    gtk_source_map_set_view(GTK_SOURCE_MAP(source_map), GTK_SOURCE_VIEW(text_view));
+    gtk_box_pack_start(GTK_BOX(sub_window_box), source_map, FALSE, FALSE, 0);
 
     display = gdk_display_get_default();
     main_data->clipboard = gtk_clipboard_get_default(display);
