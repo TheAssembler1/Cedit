@@ -33,8 +33,8 @@ static void Activate(GtkApplication *app, gpointer user_data){
   sub_window_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
   gtk_box_pack_start(GTK_BOX(main_data.window_box), sub_window_box, TRUE, TRUE, 0);
 
-  //Create_Side_Bar(sub_window_box);
-  Create_Text_Environment(sub_window_box, scrolled_window, &main_data);
+  Create_Side_Bar(sub_window_box);
+  Create_Text_Environment(sub_window_box, scrolled_window, &main_data); 
 
   gtk_widget_show_all(main_data.window);
 }
