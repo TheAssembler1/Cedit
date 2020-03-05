@@ -14,6 +14,9 @@ void File_Open(GtkWidget* widget, struct Main_Data* main_data){
     gchar* file_location;
     gint res;
 
+    if(gtk_source_file_is_local(main_data->source_file))
+        File_Save(NULL, main_data);
+
     action = GTK_FILE_CHOOSER_ACTION_SAVE;
 
     dialog = gtk_file_chooser_dialog_new("Open File", GTK_WINDOW(main_data->window), action,  "Cancel", GTK_RESPONSE_CANCEL, "Open", GTK_RESPONSE_ACCEPT, NULL);
