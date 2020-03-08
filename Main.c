@@ -1,7 +1,7 @@
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 #include "Preferences/WindowSettings.h"
-#include "TextEnvironment/TextEnvironment.h"
+#include "CodeEnvironment/CodeEnvironment.h"
 #include "HeaderBar/HeaderBar.h"
 #include "ToolBar/ToolBar.h"
 #include "SideBar/SideBar.h"
@@ -34,7 +34,7 @@ static void Activate(GtkApplication *app, char **argv){
   gtk_box_pack_start(GTK_BOX(main_data.window_box), sub_window_box, TRUE, TRUE, 0);
 
   Create_Side_Bar(sub_window_box);
-  Create_Text_Environment(sub_window_box, scrolled_window, &main_data, argv); 
+  Create_Code_Environment(sub_window_box, scrolled_window, &main_data, argv); 
 
   gtk_widget_show_all(main_data.window);
 }

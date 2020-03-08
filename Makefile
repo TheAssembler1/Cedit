@@ -1,6 +1,6 @@
 #gcc `pkg-config --cflags gtk+-3.0` -o Cedit main.c pkg-config`pkg-config --libs gtk+-3.0`
 OBJS = Main.o  \
-	   TextEnvironment/TextEnvironment.o \
+	   CodeEnvironment/CodeEnvironment.o \
 	   HeaderBar/HeaderBar.o \
 	   HeaderBar/File/File.o \
 	   HeaderBar/Edit/Edit.o \
@@ -19,7 +19,7 @@ Cedit : $(OBJS)
 Main.o : Main.c
 	cc $(LDFLAGS) -o $@ -c $^ $(LDLIBS) 
 
-TextEnvironment/TextEnvironment.o : TextEnvironment/TextEnvironment.c
+CodeEnvironment/CodeEnvironment.o : CodeEnvironment/CodeEnvironment.c
 	cc $(LDFLAGS) -o $@ -c $^ $(LDLIBS) 
 
 LineNumbers/LineNumbers.o : LineNumbers/LineNumbers.c
