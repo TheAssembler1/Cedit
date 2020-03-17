@@ -5,6 +5,7 @@
 #include "HeaderBar/HeaderBar.h"
 #include "ToolBar/ToolBar.h"
 #include "SideBar/SideBar.h"
+#include "Input/Input.h"
 #include "MainData.h"
 
 struct Main_Data main_data;
@@ -35,6 +36,8 @@ static void Activate(GtkApplication *app, char **argv){
 
   Create_Side_Bar(sub_window_box);
   Create_Code_Environment(sub_window_box, scrolled_window, &main_data, argv); 
+
+  g_signal_connect (G_OBJECT(main_data.window), "key_press_event", G_CALLBACK (Keyboard_Input), &main_data);
 
   gtk_widget_show_all(main_data.window);
 }
