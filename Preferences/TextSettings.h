@@ -2,7 +2,6 @@
 #define TEXTSETTINGS_H
 
 #define DEFAULT_LANGUAGE "c"
-//THIS CURRENTLY IS NOT IMPLEMENTED
-//#define DEFAULT_THEME "tango"
+#define DEFAULT_THEME "cobalt"
 
 #endif
