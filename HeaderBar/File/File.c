@@ -1,6 +1,7 @@
 #include "File.h"
 
 void File_New(GtkWidget* widget, struct Main_Data* main_data){
+    g_print("MESSAGE::MAKING NEW FILE");
     gtk_text_buffer_set_text(GTK_TEXT_BUFFER(main_data->text_buffer), "", -1); 
     main_data->source_file = gtk_source_file_new();
 }

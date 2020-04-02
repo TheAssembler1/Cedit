@@ -32,6 +32,8 @@ void Create_Code_Environment(GtkWidget* sub_window_box, GtkWidget* scrolled_wind
     gtk_source_buffer_set_style_scheme(main_data->text_buffer, text_scheme);
 
     main_data->clipboard = Get_Clipboard();
+
+    gtk_source_style_scheme_chooser_widget_new();
 }
 
 static void Create_Terminal(GtkWidget* scrolled_window, GtkWidget* sub_window_box){
@@ -59,7 +61,7 @@ static void Create_Terminal(GtkWidget* scrolled_window, GtkWidget* sub_window_bo
         NULL,       /* child pid */
         -1,         /* timeout */
         NULL, NULL, NULL);
-    vte_terminal_set_size(VTE_TERMINAL(terminal), 1, 5);
+    vte_terminal_set_size(VTE_TERMINAL(terminal), 1, DEFAULT_TERMINAL_WINDOW_HEIGHT);
     gtk_box_pack_start(GTK_BOX(text_terminal_box), terminal, FALSE, FALSE, 0);
 }
 

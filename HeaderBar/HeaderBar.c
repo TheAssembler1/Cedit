@@ -51,6 +51,7 @@ static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data)
     GtkWidget* file_open_submenu_item;
     GtkWidget* file_save_submenu_item;
     GtkWidget* file_saveas_submenu_item;
+    GtkAccelGroup* accel_group;
 
     file_item = gtk_menu_item_new_with_label("File");
 
@@ -60,10 +61,17 @@ static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data)
 
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(file_item), file_submenu);
 
-    file_new_submenu_item = gtk_menu_item_new_with_label("New");
-    file_open_submenu_item = gtk_menu_item_new_with_label("Open");
-    file_save_submenu_item = gtk_menu_item_new_with_label("Save");
+    file_new_submenu_item = gtk_menu_item_new_with_mnemonic("_New"); 
+    file_open_submenu_item = gtk_menu_item_new_with_mnemonic("_Open");
+    file_save_submenu_item = gtk_menu_item_new_with_mnemonic("_Save");
     file_saveas_submenu_item = gtk_menu_item_new_with_label("Save As...");
+
+    accel_group = gtk_accel_group_new();
+    gtk_window_add_accel_group(GTK_WINDOW(main_data->window), accel_group);
+
+    gtk_widget_add_accelerator(file_new_submenu_item, "activate", accel_group, GDK_KEY_n, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+    gtk_widget_add_accelerator(file_open_submenu_item, "activate", accel_group, GDK_KEY_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+    gtk_widget_add_accelerator(file_save_submenu_item, "activate", accel_group, GDK_KEY_s, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
     gtk_menu_shell_append(GTK_MENU_SHELL(file_submenu), file_new_submenu_item);
     gtk_menu_shell_append(GTK_MENU_SHELL(file_submenu), file_open_submenu_item);

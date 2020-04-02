@@ -7,5 +7,6 @@
 #define WINDOW_TITLE "Cedit"
 #define WINDOW_ID "com.github.TheAssembler1.Cedit"
 #define WINDOW_LETTER_LOGO "./Logo/Letter.png"
+#define DEFAULT_TERMINAL_WINDOW_HEIGHT 10
 
 #endif
