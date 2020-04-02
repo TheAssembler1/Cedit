@@ -8,8 +8,6 @@ void Create_Code_Environment(GtkWidget* sub_window_box, GtkWidget* scrolled_wind
     GtkWidget* text_view;
     GtkSourceLanguage* c_language;
     GtkSourceLanguageManager* c_language_manager;
-    GtkSourceStyleSchemeManager* theme_language_manager;
-    GtkSourceStyleScheme* text_scheme;;
 
     c_language_manager = gtk_source_language_manager_get_default();
     c_language = gtk_source_language_manager_get_language(c_language_manager, DEFAULT_LANGUAGE);
@@ -25,11 +23,6 @@ void Create_Code_Environment(GtkWidget* sub_window_box, GtkWidget* scrolled_wind
 
     Create_Terminal(scrolled_window, sub_window_box);
     Create_Source_Map(sub_window_box, GTK_SOURCE_VIEW(text_view));
-
-    theme_language_manager = gtk_source_style_scheme_manager_get_default();
-    text_scheme = gtk_source_style_scheme_manager_get_scheme(theme_language_manager, DEFAULT_THEME);
-
-    gtk_source_buffer_set_style_scheme(main_data->text_buffer, text_scheme);
 
     main_data->clipboard = Get_Clipboard();
 }
