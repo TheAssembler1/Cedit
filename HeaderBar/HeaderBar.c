@@ -1,11 +1,11 @@
 #include "HeaderBar.h"
 
-static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data);
+static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data, GtkAccelGroup* accel_group);
 static void Create_Edit_Menu(GtkWidget* header_bar, struct Main_Data* main_data);
 static void Create_Settings_Menu(GtkWidget* header_bar, struct Main_Data* main_data);
 static void Create_Help_Menu(GtkWidget* header_bar, GtkWidget* window);
 
-GtkWidget* Create_Header_Bar(struct Main_Data* main_data){
+GtkWidget* Create_Header_Bar(struct Main_Data* main_data, GtkAccelGroup* accel_group){
     GtkWidget* header_bar;
 
     main_data->window_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -14,7 +14,7 @@ GtkWidget* Create_Header_Bar(struct Main_Data* main_data){
     gtk_container_add(GTK_CONTAINER(main_data->window), main_data->window_box);
     gtk_box_pack_start(GTK_BOX(main_data->window_box), header_bar, FALSE, FALSE, 0);
 
-    Create_File_Menu(header_bar, main_data);
+    Create_File_Menu(header_bar, main_data, accel_group);
     Create_Edit_Menu(header_bar, main_data);
     Create_Settings_Menu(header_bar, main_data);
     Create_Help_Menu(header_bar, main_data->window);
@@ -44,14 +44,13 @@ static void Create_Settings_Menu(GtkWidget* header_bar, struct Main_Data* main_d
     g_signal_connect(settings_language_submenu_item, "activate", G_CALLBACK(Settings_Language), main_data);
 }
 
-static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data){
+static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data, GtkAccelGroup* accel_group){
     GtkWidget* file_item;
     GtkWidget* file_submenu;
     GtkWidget* file_new_submenu_item;
     GtkWidget* file_open_submenu_item;
     GtkWidget* file_save_submenu_item;
     GtkWidget* file_saveas_submenu_item;
-    GtkAccelGroup* accel_group;
 
     file_item = gtk_menu_item_new_with_label("File");
 
@@ -65,9 +64,6 @@ static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data)
     file_open_submenu_item = gtk_menu_item_new_with_mnemonic("_Open");
     file_save_submenu_item = gtk_menu_item_new_with_mnemonic("_Save");
     file_saveas_submenu_item = gtk_menu_item_new_with_label("Save As...");
-
-    accel_group = gtk_accel_group_new();
-    gtk_window_add_accel_group(GTK_WINDOW(main_data->window), accel_group);
 
     gtk_widget_add_accelerator(file_new_submenu_item, "activate", accel_group, GDK_KEY_n, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
     gtk_widget_add_accelerator(file_open_submenu_item, "activate", accel_group, GDK_KEY_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);

@@ -1,15 +1,15 @@
 #include "ToolBar.h"
 
 static void Create_File_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_bar);
-static void Create_Edit_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_bar);
+static void Create_Edit_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_bar, GtkAccelGroup* accel_group);
 
-void Create_Tool_Bar(struct Main_Data* main_data){
+void Create_Tool_Bar(struct Main_Data* main_data, GtkAccelGroup* accel_group){
     GtkWidget* tool_bar;
 
     tool_bar = gtk_toolbar_new();
 
     Create_File_Tool_Items(main_data, tool_bar);
-    Create_Edit_Tool_Items(main_data, tool_bar);
+    Create_Edit_Tool_Items(main_data, tool_bar, accel_group);
 
     gtk_box_pack_start(GTK_BOX(main_data->window_box), tool_bar, FALSE, FALSE, 0);
 }
@@ -54,7 +54,7 @@ static void Create_File_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_
     g_signal_connect(file_saveas, "clicked", G_CALLBACK(File_Saveas_Toolbar), main_data);
 }
 
-static void Create_Edit_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_bar){
+static void Create_Edit_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_bar, GtkAccelGroup* accel_group){
     GtkToolItem* Edit_Undo;
     GtkToolItem* Edit_Redo;
     GtkToolItem* Edit_Cut;
@@ -75,11 +75,14 @@ static void Create_Edit_Tool_Items(struct Main_Data* main_data, GtkWidget* tool_
     Edit_Copy_Button = gtk_image_new_from_icon_name("edit-copy", 0);
     Edit_Paste_Button = gtk_image_new_from_icon_name("edit-paste", 0);
 
-    Edit_Undo = gtk_tool_button_new(Edit_Undo_Button, NULL);
-    Edit_Redo = gtk_tool_button_new(Edit_Redo_Button, NULL);
+    Edit_Undo = gtk_tool_button_new(Edit_Undo_Button, "_Z");
+    Edit_Redo = gtk_tool_button_new(Edit_Redo_Button, "_U");
     Edit_Cut = gtk_tool_button_new(Edit_Cut_Button, NULL);
     Edit_Copy = gtk_tool_button_new(Edit_Copy_Button, NULL);
     Edit_Paste = gtk_tool_button_new(Edit_Paste_Button, NULL);
+
+    gtk_widget_add_accelerator(GTK_WIDGET(Edit_Undo), "clicked", accel_group, GDK_KEY_z, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+    gtk_widget_add_accelerator(GTK_WIDGET(Edit_Redo), "clicked", accel_group, GDK_KEY_y, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Undo, -1);
     gtk_toolbar_insert(GTK_TOOLBAR(tool_bar), Edit_Redo, -1);

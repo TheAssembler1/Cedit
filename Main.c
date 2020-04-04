@@ -12,6 +12,7 @@ struct Main_Data main_data;
 static void Activate(GtkApplication *app, char **argv){
   GtkWidget* scrolled_window;
   GtkWidget* sub_window_box;
+  GtkAccelGroup* accel_group;
 
   main_data.window = gtk_application_window_new(app);
   GdkPixbuf* letter_logo = gdk_pixbuf_new_from_file (WINDOW_LETTER_LOGO, NULL);
@@ -26,9 +27,12 @@ static void Activate(GtkApplication *app, char **argv){
 
   main_data.text_buffer = gtk_source_buffer_new(NULL);
   main_data.about_window = gtk_about_dialog_new();
-  
-  Create_Header_Bar(&main_data);
-  Create_Tool_Bar(&main_data);
+
+  accel_group = gtk_accel_group_new();
+  gtk_window_add_accel_group(GTK_WINDOW(main_data.window), accel_group);
+
+  Create_Header_Bar(&main_data, accel_group);
+  Create_Tool_Bar(&main_data, accel_group);
 
   sub_window_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
   gtk_box_pack_start(GTK_BOX(main_data.window_box), sub_window_box, TRUE, TRUE, 0);

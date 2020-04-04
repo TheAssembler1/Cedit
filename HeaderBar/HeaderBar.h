@@ -10,6 +10,6 @@
 #include "Settings/Settings.h"
 #include <gdkkeysyms.h>
 
-GtkWidget* Create_Header_Bar(struct Main_Data* main_data);
+GtkWidget* Create_Header_Bar(struct Main_Data* main_data, GtkAccelGroup* accel_group);
 
 #endif
