@@ -4,7 +4,6 @@
 #include "CodeEnvironment/CodeEnvironment.h"
 #include "HeaderBar/HeaderBar.h"
 #include "ToolBar/ToolBar.h"
-#include "SideBar/SideBar.h"
 #include "MainData.h"
 
 struct Main_Data main_data;
@@ -19,6 +18,7 @@ static void Activate(GtkApplication *app, char **argv){
   gtk_window_set_icon(GTK_WINDOW(main_data.window), letter_logo);
   gtk_window_set_title (GTK_WINDOW(main_data.window), WINDOW_TITLE);
   gtk_window_set_default_size (GTK_WINDOW(main_data.window), WINDOW_WIDTH, WINDOW_HEIGHT);
+  gtk_window_maximize(GTK_WINDOW(main_data.window));
 
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_container_set_border_width(GTK_CONTAINER(scrolled_window), WINDOW_BORDER);
@@ -37,7 +37,6 @@ static void Activate(GtkApplication *app, char **argv){
   sub_window_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
   gtk_box_pack_start(GTK_BOX(main_data.window_box), sub_window_box, TRUE, TRUE, 0);
 
-  Create_Side_Bar(sub_window_box);
   Create_Code_Environment(sub_window_box, scrolled_window, &main_data, argv); 
 
   gtk_widget_show_all(main_data.window);

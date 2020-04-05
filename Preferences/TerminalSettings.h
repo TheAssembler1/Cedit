@@ -1,0 +1,6 @@
+#ifndef TERMINAL_SETTINGS_H
+#define TERMINAL_SETTINGS_H
+
+#define TERMINAL_BORDER_WIDTH 10
+
+#endif

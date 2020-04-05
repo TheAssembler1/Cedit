@@ -51,17 +51,11 @@ static void Create_Terminal(GtkWidget* scrolled_window, GtkWidget* sub_window_bo
     envp = g_get_environ();
     command = (gchar *[]){g_strdup(g_environ_getenv(envp, "SHELL")), NULL };
     g_strfreev(envp);
-    vte_terminal_spawn_async(VTE_TERMINAL(terminal),
-        VTE_PTY_DEFAULT,
-        NULL,       /* working directory  */
-        command,    /* command */
-        NULL,       /* environment */
-        0,          /* spawn flags */
-        NULL, NULL, /* child setup */
-        NULL,       /* child pid */
-        -1,         /* timeout */
-        NULL, NULL, NULL);
+    vte_terminal_spawn_async(VTE_TERMINAL(terminal), VTE_PTY_DEFAULT, NULL, command, NULL, 0, NULL, NULL, NULL, -1, NULL, NULL, NULL);
+
     vte_terminal_set_size(VTE_TERMINAL(terminal), 1, DEFAULT_TERMINAL_WINDOW_HEIGHT);
+    gtk_container_set_border_width(GTK_CONTAINER(text_terminal_box), TERMINAL_BORDER_WIDTH);
+
     gtk_box_pack_start(GTK_BOX(text_terminal_box), terminal, FALSE, FALSE, 0);
 }
 

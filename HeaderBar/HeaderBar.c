@@ -2,7 +2,6 @@
 
 static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data, GtkAccelGroup* accel_group);
 static void Create_Edit_Menu(GtkWidget* header_bar, struct Main_Data* main_data);
-static void Create_Settings_Menu(GtkWidget* header_bar, struct Main_Data* main_data);
 static void Create_Help_Menu(GtkWidget* header_bar, GtkWidget* window);
 
 GtkWidget* Create_Header_Bar(struct Main_Data* main_data, GtkAccelGroup* accel_group){
@@ -16,32 +15,7 @@ GtkWidget* Create_Header_Bar(struct Main_Data* main_data, GtkAccelGroup* accel_g
 
     Create_File_Menu(header_bar, main_data, accel_group);
     Create_Edit_Menu(header_bar, main_data);
-    Create_Settings_Menu(header_bar, main_data);
     Create_Help_Menu(header_bar, main_data->window);
-}
-
-static void Create_Settings_Menu(GtkWidget* header_bar, struct Main_Data* main_data){
-    GtkWidget* settings_item;
-    GtkWidget* settings_submenu;
-    GtkWidget* settings_text_submenu_item;
-    GtkWidget* settings_language_submenu_item;
-
-    settings_item = gtk_menu_item_new_with_label("Settings");
-
-    gtk_menu_shell_append(GTK_MENU_SHELL(header_bar), settings_item);
-
-    settings_submenu = gtk_menu_new();
-
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(settings_item), settings_submenu);
-
-    settings_text_submenu_item = gtk_menu_item_new_with_label("Text");
-    settings_language_submenu_item = gtk_menu_item_new_with_label("Language");
-
-    gtk_menu_shell_append(GTK_MENU_SHELL(settings_submenu), settings_text_submenu_item);
-    gtk_menu_shell_append(GTK_MENU_SHELL(settings_submenu), settings_language_submenu_item);
-
-    g_signal_connect(settings_text_submenu_item, "activate", G_CALLBACK(Settings_Text), main_data);
-    g_signal_connect(settings_language_submenu_item, "activate", G_CALLBACK(Settings_Language), main_data);
 }
 
 static void Create_File_Menu(GtkWidget* header_bar, struct Main_Data* main_data, GtkAccelGroup* accel_group){
