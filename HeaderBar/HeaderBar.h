@@ -8,7 +8,7 @@
 #include "Edit/Edit.h"
 #include "Help/Help.h"
 #include "Settings/Settings.h"
-#include <gdkkeysyms.h>
+#include <gtk-3.0/gdk/gdkkeysyms.h>
 
 GtkWidget* Create_Header_Bar(struct Main_Data* main_data, GtkAccelGroup* accel_group);
 
